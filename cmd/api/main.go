@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"social/internal/server"
+
+	"github.com/anbinh2911/social/internal/server"
 )
 
 func main() {

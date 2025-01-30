@@ -1,22 +1,11 @@
 package server
 
-import (
-	"net/http"
+func (s *Server) RegisterRoutes() {
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-)
+	userGroup := s.Group("/users")
+	userGroup.Post("/v1/regsiter", s.registerUserHandler)
+	userGroup.Post("/v1/login", s.loginHandler)
+	userGroup.Post("/v1/forgot", s.forgotPasswordHandler)
+	userGroup.Get("/v1/detail", s.userDetailHandler)
 
-func (s *Server) RegisterRoutes() http.Handler {
-	e := echo.New()
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	userGroup := e.Group("/users")
-	userGroup.POST("/v1/regsiter", s.registerUserHandler)
-	userGroup.POST("/v1/login", s.loginHandler)
-	userGroup.POST("/v1/forgot", s.forgotPasswordHandler)
-	userGroup.GET("/v1/detail", s.userDetailHandler)
-
-	return e
 }
